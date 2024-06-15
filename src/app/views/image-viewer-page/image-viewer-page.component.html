@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+<body>
+<!-- Модальное окно для просмотра увеличенного изображения -->
+<div *ngIf="selectedImageUrl" class="modal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <img [src]="selectedImageUrl" alt="Enlarged Image">
+  </div>
+</div>
+  <nav class="header">
+    <h1 class="name">Kuzushiji</h1>
+    <button class="btn-logout" (click)="logout()">Выйти</button>
+  </nav>
+<div class="main-content">
+  <div class="content">
+    <!-- Выбор файла для загрузки -->
+    <!-- Отображение выбранного или загруженного изображения -->
+    <div class="main-image-container">
+      <img *ngIf="previewSource" [src]="previewSource" alt="Preview Image">
+      <img *ngIf="!previewSource && imageSource" [src]="imageSource" alt="Uploaded Image">
+    </div>
+    <div class="file-upload">
+      <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
+      <p class="file-name" *ngIf="uploadStatus">{{ uploadStatus }}</p>
+      <button class="btn" (click)="fileInput.click()">Выбрать изображение</button>
+      <button class="btn" (click)="uploadImage()" [disabled]="!selectedFile">Загрузить изображение</button>
+      <div *ngIf="uploadProgress !== 0">
+        <progress value="{{uploadProgress}}" max="100"></progress>
+        <span>{{uploadProgress}}%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Сайдбар для миниатюр и пагинации -->
+  <div class="sidebar">
+    <h3 class="history-name">История</h3>
+    <div class="thumbnails">
+      <div *ngFor="let src of imageSources.slice(currentPage * pageSize, currentPage * pageSize + pageSize)" class="thumbnail" (click)="openModal(src)">
+        <img [src]="src" alt="Loaded image">
+      </div>
+    </div>
+    <div class="pagination">
+      <button class="btn" (click)="changePage(-1)" [disabled]="currentPage <= 0"><i class="fas fa-arrow-left"></i></button>
+      <button class="btn" (click)="changePage(1)" [disabled]="currentPage >= (imageSources.length / pageSize) - 1"><i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+</body>

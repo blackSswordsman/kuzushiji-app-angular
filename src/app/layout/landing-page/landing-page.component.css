@@ -1,0 +1,36 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("https://repository-images.githubusercontent.com/189136540/d4944180-81f4-11e9-8afa-cf0a43b76fb7"); /* Путь к вашему изображению */
+    background-size: cover; /* Покрывает весь экран */
+    background-position: center; /* Центрирует изображение на экране */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.8); /* Делаем фон немного прозрачным для читаемости текста */
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    border-radius: 8px;
+}
+
+button {
+    background-color: #7a7a52;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
